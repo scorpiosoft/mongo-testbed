@@ -60,7 +60,7 @@ const PollAge = (props) =>
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        open poll
+        poll: {age}
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
