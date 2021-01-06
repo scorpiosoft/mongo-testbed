@@ -1,3 +1,3 @@
 module.exports = {
-  PollAge: require("./PollAge")
+  PollAge: require("./pollAge")
 };

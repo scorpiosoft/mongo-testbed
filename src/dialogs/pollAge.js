@@ -3,17 +3,37 @@ import { Modal, Button, Form } from 'react-bootstrap';
 
 const AgeForm = (props) =>
 {
-  const {u, a} = props;
-  // TODO - set default u, a if not passed in
+  const handleChange = event =>
+  {
+    const { name, value } = event.target;
+    if ( name === 'a' )
+    {
+      props.setAge(value);
+    } else {
+      props.setUsername(value);
+    }
+  }
   return (
 <Form id="pollAge">
   <Form.Group controlId="formUser">
     <Form.Label>Username</Form.Label>
-    <Form.Control type="text" placeholder="user" />
+    <Form.Control
+      name='u'
+      value={props.username}
+      type="text"
+      placeholder="user"
+      onChange={handleChange}
+    />
   </Form.Group>
   <Form.Group controlId="formAge">
     <Form.Label>Age</Form.Label>
-    <Form.Control type="text" placeholder="13" />
+    <Form.Control
+      name='a'
+      value={props.age}
+      type="number"
+      placeholder="13"
+      onChange={handleChange}
+    />
   </Form.Group>
   {/* <Button variant="primary" type="submit">
     Submit
@@ -25,14 +45,22 @@ const AgeForm = (props) =>
 const PollAge = (props) =>
 {
   const [show, setShow] = useState(false);
+  const [username, setUsername] = useState('user');
+  const [age, setAge] = useState(13);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () =>
+  {
+    // handle mongo data change
+
+    // now close dialog
+    setShow(false);
+  }
   const handleShow = () => setShow(true);
 
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
+        open poll
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
@@ -40,7 +68,12 @@ const PollAge = (props) =>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AgeForm/>
+          <AgeForm
+            username={username}
+            setUsername={setUsername}
+            age={age}
+            setAge={setAge}
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

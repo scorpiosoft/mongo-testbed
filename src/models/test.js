@@ -1,4 +1,4 @@
-import PollAge from '../dialogs';
+// import PollAge from '../dialogs';
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
@@ -12,10 +12,10 @@ const testSchema = new Schema({
     avg: Number
   }
 });
-testSchema.methods.pollAge = function(cb)
-{
-  res = PollAge();
-}
+// testSchema.methods.pollAge = function(cb)
+// {
+//   res = PollAge();
+// }
 
 const Test = mongoose.model('Test', testSchema);
 
