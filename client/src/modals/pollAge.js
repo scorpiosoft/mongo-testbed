@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import testApi from "../api/testApi";
 
 const AgeForm = (props) =>
 {
@@ -48,14 +49,27 @@ const PollAge = (props) =>
   const [username, setUsername] = useState('user');
   const [age, setAge] = useState(13);
 
+  const handleShow = () =>
+  {
+    // fetch mongo data
+    testApi.getAge().then(res =>
+    {
+      const d = JSON.stringify(res.data, 2);
+      console.log(d);
+      // setAge(res.data.age.value)
+      // if (res.data.age.)
+    }).catch(err => console.log(err));
+    // now open dialog
+    setShow(true);
+  }
   const handleClose = () =>
   {
     // handle mongo data change
-
+    testApi.setAge().then(res =>
+    {}).catch(err => console.log(err));
     // now close dialog
     setShow(false);
   }
-  const handleShow = () => setShow(true);
 
   return (
     <>

@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import PollAge from './dialogs/pollAge';
+import Age from './components/age';
 
 function App() {
   return (
     <div className="App">
       {/* <header className="App-header">
       </header> */}
-      <PollAge />
+      <Age />
     </div>
   );
 }
