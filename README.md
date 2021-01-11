@@ -1,4 +1,4 @@
-# react_memory_game
+# mongo-testbed
 A sandbox in which to test all things MongoDB
 Uses React for display
 
