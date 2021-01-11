@@ -79,7 +79,7 @@ const PollAge = (props) =>
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Age Poll</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <AgeForm
@@ -93,7 +93,7 @@ const PollAge = (props) =>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button form="pollAge" key="submit" htmlType="submit" variant="primary" onClick={handleClose}>
+          <Button form="pollAge" key="submit" type="submit" variant="primary" onClick={handleClose}>
             Submit
           </Button>
         </Modal.Footer>

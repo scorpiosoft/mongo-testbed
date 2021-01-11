@@ -7,10 +7,10 @@ router.route("/age")
   .post(testController.setAge);
 
 // Matches with "/api/test/:id"
-router
-  .route("/:id")
-  .get(testController.findById)
-  .put(testController.update)
-  .delete(testController.remove);
+// router
+//   .route("/:id")
+//   .get(testController.findById)
+//   .put(testController.update)
+//   .delete(testController.remove);
 
 module.exports = router;

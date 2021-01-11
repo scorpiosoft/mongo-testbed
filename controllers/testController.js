@@ -3,8 +3,8 @@ import validate_exists from "../util/util"
 
 // Defining methods for the testController
 export function getAge(req, res) {
-  Test.findOne(req.query)
-      .then(data => res.json(data))
+  Test.findOne()
+      .then(data => {res.json(data);console.log(data)})
       .catch(err => res.status(422).json(err));
 }
 export function setAge(req, res) {
