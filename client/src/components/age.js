@@ -2,8 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import PollAge from '../modals/pollAge';
 
-export const Age = () =>
-{
+export default function Age() {
   return (
     <Row>
       <Col>
@@ -13,5 +12,5 @@ export const Age = () =>
         <PollAge />
       </Col>
     </Row>
-  )
+  );
 }
