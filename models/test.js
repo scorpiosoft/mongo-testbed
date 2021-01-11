@@ -4,9 +4,15 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const testSchema = new Schema({
+  t: {
+    alias: title,
+    type: String,
+    required: true,
+    index: true
+  },
   // publisher recommended age
   age: {
-    type: Number,
+    value: Number,
     votes: [{ user: String, value: Number }],
     // average polled age
     avg: Number
