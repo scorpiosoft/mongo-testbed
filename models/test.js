@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const testSchema = new Schema({
   t: {
-    alias: title,
+    alias: "title",
     type: String,
     required: true,
     index: true
@@ -25,4 +25,6 @@ const testSchema = new Schema({
 
 const Test = mongoose.model('Test', testSchema);
 
-module.exports = Test;
+module.exports = {
+  Test
+}

@@ -30,5 +30,7 @@ function isalpha(str)
   }
 };
 
-export const validate_exists = validate_exists;
-export const isalpha = isalpha;
+module.exports = {
+  validate_exists,
+  isalpha
+}

@@ -1,10 +1,10 @@
-const router = require("express").Router();
+const express = require('express')
+const router = express.Router();
 const testController = require("../../controllers/testController");
 
 // Matches with "/api/test/age"
-router.route("/age")
-  .get(testController.getAge)
-  .post(testController.setAge);
+router.get("/age", testController.getAge)
+router.post("/age", testController.setAge)
 
 // Matches with "/api/test/:id"
 // router

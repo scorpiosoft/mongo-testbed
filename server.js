@@ -21,14 +21,15 @@ app.use(express.static("public"));
 mongoose.Promise = Promise;
 // Connect to the Mongo DB
 // If deployed, use the deployed database. Otherwise use the local scraper database
-const MONGODB_URI = process.env.MONGODB_URI || "testdb://localhost/testbed";
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/testbed";
+let mongoInstance
 
 // import routes and give the server access to them
-const routes = require("./routes");
-app.use(routes);
+const routes = require("./routes/api/test");
+app.use('/api', routes);
 
 // Start the API server
-app.listen(PORT, function() {
+app.listen(PORT, async function() {
+  mongoInstance = await mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
