@@ -3,11 +3,13 @@ const util = require("../util/util");
 
 // Defining methods for the testController
 function getAge(req, res) {
+  console.log('getAge');
   Test.findOne()
       .then(data => {res.json(data);console.log(data)})
       .catch(err => res.status(422).json(err));
 }
 function setAge(req, res) {
+  console.log('setAge');
   let data = {};
   if (util.validate_exists(req.body.id))
   {

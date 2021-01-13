@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const testController = require("../../controllers/testController");
 
-// Matches with "/api/test/age"
 router.route("/api/test/age")
   .get(testController.getAge)
   .post(testController.setAge);
