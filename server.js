@@ -7,12 +7,6 @@ const PORT = process.env.PORT || 3001;
 // initialize Express
 const app = express();
 
-// get around CORS
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
-
 //
 // Configure Middleware
 //
@@ -29,7 +23,7 @@ app.use(logger('dev'));
 // set mongoose to use promises
 mongoose.Promise = Promise;
 // Connect to the Mongo DB
-// If deployed, use the deployed database. Otherwise use the local scraper database
+// If deployed, use the deployed database. Otherwise use the local database
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/testbed";
 let mongoInstance;
 
