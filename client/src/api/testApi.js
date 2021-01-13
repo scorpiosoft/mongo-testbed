@@ -2,11 +2,11 @@ import axios from "axios";
 
 const getAge = () =>
 {
-  return axios.get("/api/test/age");
+  return axios.get("http://localhost:3001/api/test/age");
 }
 const setAge = () =>
 {
-  return axios.post("/api/test/age");
+  return axios.post("http://localhost:3001/api/test/age");
 }
 const testApi = { getAge, setAge };
 export default testApi;
