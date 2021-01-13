@@ -1,15 +1,15 @@
-import { Test } from "../models";
-import validate_exists from "../util/util"
+const Test = require("../models/test");
+const util = require("../util/util");
 
 // Defining methods for the testController
-export function getAge(req, res) {
+function getAge(req, res) {
   Test.findOne()
       .then(data => {res.json(data);console.log(data)})
       .catch(err => res.status(422).json(err));
 }
-export function setAge(req, res) {
+function setAge(req, res) {
   let data = {};
-  if (validate_exists(req.body.id))
+  if (util.validate_exists(req.body.id))
   {
     Test.findById(req.body.id)
         .then(data => res.json(data))
@@ -33,3 +33,4 @@ export function setAge(req, res) {
       .then(data => res.json(data))
       .catch(err => res.status(422).json(err));
 }
+module.exports = { getAge, setAge }

@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const testSchema = new Schema({
   t: {
-    alias: title,
+    alias: 'title',
     type: String,
     required: true,
     index: true

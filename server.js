@@ -21,7 +21,7 @@ app.use(express.static("public"));
 mongoose.Promise = Promise;
 // Connect to the Mongo DB
 // If deployed, use the deployed database. Otherwise use the local scraper database
-const MONGODB_URI = process.env.MONGODB_URI || "testdb://localhost/testbed";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/testbed";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // import routes and give the server access to them
