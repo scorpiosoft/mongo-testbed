@@ -31,11 +31,14 @@ function setAge(req, res) {
     const tot = data.age.votes.reduce((accum, cur) => accum + cur.value, 0);
     data.age.avg = Math.round(tot/len);
   } else {
+    // technically, should never get here
+    console.log(`id (${req.body.id}) not found`)
     data = { age: { value: 13, votes: [{user: req.body.u, value: req.body.a}], avg: req.body.a } };
   }
   // const options = {
   //   upsert: true
   // }
+  console.log(`updateOne: (${JSON.stringify(data,2)})`)
   Test.updateOne({_id: data._id}, data/*, options*/)
       .then(data => res.json(data))
       .catch(err => res.status(422).json(err));
