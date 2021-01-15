@@ -10,7 +10,7 @@ function getAge(req, res) {
 }
 function setAge(req, res) {
   console.log('setAge');
-  let data = {};
+  let data = undefined;
   if (util.validate_exists(req.body.id))
   {
     Test.findById(req.body.id)
@@ -18,16 +18,21 @@ function setAge(req, res) {
         .catch(err => res.status(422).json(err));
   }
   // check if this user already voted
-  const votedIdx = data.age.votes.find(e => e.user === req.body.u);
-  if (votedIdx)
+  if (util.validate_exists(data))
   {
-    data.age.votes[votedIdx].value = req.body.a;
+    const votedIdx = data.age.votes.find(e => e.user === req.body.u);
+    if (votedIdx)
+    {
+      data.age.votes[votedIdx].value = req.body.a;
+    } else {
+      data.age.votes.push({user: req.body.u, value: req.body.a});
+    }
+    const len = data.age.votes.length;
+    const tot = data.age.votes.reduce((accum, cur) => accum + cur.value, 0);
+    data.age.avg = Math.round(tot/len);
   } else {
-    data.age.votes.push({user: req.body.u, value: req.body.a});
+    data = { age: { value: 13, votes: [{user: req.body.u, value: req.body.a}], avg: req.body.a } };
   }
-  const len = data.age.votes.length;
-  const tot = data.age.votes.reduce((accum, cur) => accum + cur.value, 0);
-  data.age.avg = Math.round(tot/len);
   // const options = {
   //   upsert: true
   // }
