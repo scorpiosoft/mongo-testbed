@@ -7,6 +7,12 @@ const PORT = process.env.PORT || 3001;
 // initialize Express
 const app = express();
 
+// get around CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 //
 // Configure Middleware
 //
