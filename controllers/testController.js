@@ -35,11 +35,12 @@ function setAge(req, res) {
     console.log(`id (${req.body.id}) not found`)
     data = { age: { value: 13, votes: [{user: req.body.u, value: req.body.a}], avg: req.body.a } };
   }
-  // const options = {
-  //   upsert: true
-  // }
+  const options = {
+    upsert: true
+  }
   console.log(`updateOne: (${JSON.stringify(data,2)})`)
-  Test.updateOne({_id: data._id}, data/*, options*/)
+  // Test.updateOne({_id: data._id}, data)
+  Test.updateOne({_id: data._id}, data, options)
       .then(data => res.json(data))
       .catch(err => res.status(422).json(err));
 }

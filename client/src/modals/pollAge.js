@@ -48,29 +48,33 @@ const PollAge = (props) =>
   const [show, setShow] = useState(false);
   const [username, setUsername] = useState('user');
   const [age, setAge] = useState(13);
+  const [doc, setDoc] = useState(undefined);
 
   const handleShow = () =>
   {
     // fetch mongo data
     testApi.getAge().then(res =>
     {
-      const d = JSON.stringify(res.data, 2);
-      console.log(d);
-      // setAge(res.data.age.value)
-      // if (res.data.age.)
+      console.log(`PollAge.handleShow: res.data: ${JSON.stringify(res.data, 2)}`);
+      setDoc(res.data);
     }).catch(err => console.log(err));
     // now open dialog
     setShow(true);
   }
   const handleClose = () =>
   {
+    setShow(false);
+  }
+  const handleSubmit = () =>
+  {
+    doc.u = username;
+    doc.a = age;
     // handle mongo data change
-    testApi.setAge().then(res =>
+    testApi.setAge(doc).then(res =>
     {}).catch(err => console.log(err));
     // now close dialog
     setShow(false);
   }
-
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -93,7 +97,7 @@ const PollAge = (props) =>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button form="pollAge" key="submit" type="submit" variant="primary" onClick={handleClose}>
+          <Button form="pollAge" key="submit" type="submit" variant="primary" onClick={handleSubmit}>
             Submit
           </Button>
         </Modal.Footer>
