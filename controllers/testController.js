@@ -20,34 +20,35 @@ function setAge(req, res) {
   console.log(`testController:setAge:data(${JSON.stringify(data,null,2)})`);
   if (util.validate_exists(data._id))
   {
-    console.log('testController:setAge - data._id does not exist');
-    return undefined;
-  }
-  // check if this user already voted
-  if (util.validate_exists(data.age.votes))
-  {
-    const votedIdx = data.age.votes.find(e => e.user === data.u);
-    if (votedIdx)
+    // check if this user already voted
+    if (util.validate_exists(data.age.votes))
     {
-      data.age.votes[votedIdx].value = data.a;
+      const votedIdx = data.age.votes.find(e => e.user === data.u);
+      if (votedIdx)
+      {
+        data.age.votes[votedIdx].value = data.a;
+      } else {
+        data.age.votes.push({user: data.u, value: req.body.a});
+      }
+      const len = data.age.votes.length;
+      const tot = data.age.votes.reduce((accum, cur) => accum + cur.value, 0);
+      data.age.avg = Math.round(tot/len);
     } else {
-      data.age.votes.push({user: data.u, value: req.body.a});
+      // technically, should never get here
+      console.log(`testController:setAge no 'votes' property: (${JSON.stringify(data.age,null,2)})`)
+      return {};
     }
-    const len = data.age.votes.length;
-    const tot = data.age.votes.reduce((accum, cur) => accum + cur.value, 0);
-    data.age.avg = Math.round(tot/len);
+    // const options = {
+    //   upsert: true
+    // }
+    console.log(`testController:setAge updateOne: (${JSON.stringify(data,null,2)})`)
+    // Test.updateOne({_id: data._id}, data, options)
+    Test.updateOne({_id: data._id}, data)
+        .then(data => res.json(data))
+        .catch(err => res.status(422).json(err));
   } else {
-    // technically, should never get here
-    console.log(`testController:setAge no 'votes' property: (${JSON.stringify(data.age,null,2)})`)
-    return undefined;
+    console.log('testController:setAge - data._id does not exist');
+    return {};
   }
-  // const options = {
-  //   upsert: true
-  // }
-  console.log(`testController:setAge updateOne: (${JSON.stringify(data,null,2)})`)
-  // Test.updateOne({_id: data._id}, data, options)
-  Test.updateOne({_id: data._id}, data)
-      .then(data => res.json(data))
-      .catch(err => res.status(422).json(err));
 }
 module.exports = { getAge, setAge }
