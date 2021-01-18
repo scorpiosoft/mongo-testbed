@@ -3,20 +3,22 @@ const util = require("../util/util");
 
 // Defining methods for the testController
 function getAge(req, res) {
-  console.log('getAge');
-  Test.findOne()
+  console.log('testController:getAge');
+  Test.findOne({}, 'age _id')
       .then(data => {res.json(data);console.log(data)})
       .catch(err => res.status(422).json(err));
 }
 function setAge(req, res) {
-  console.log('setAge');
+  console.log('testController:setAge');
   let data = undefined;
   if (util.validate_exists(req.body._id))
   {
     Test.findById(req.body._id)
         .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
+    console.log(`setAge:findById:data:${JSON.stringify(data,null,2)}`);
   }
+  console.log(`sanity check:data:${JSON.stringify(data,null,2)}`);
   // check if this user already voted
   if (util.validate_exists(data))
   {
@@ -38,7 +40,7 @@ function setAge(req, res) {
   // const options = {
   //   upsert: true
   // }
-  console.log(`updateOne: (${JSON.stringify(data,2)})`)
+  console.log(`updateOne: (${JSON.stringify(data,null,2)})`)
   // Test.updateOne({_id: data._id}, data, options)
   Test.updateOne({_id: data._id}, data)
       .then(data => res.json(data))
