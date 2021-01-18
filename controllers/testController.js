@@ -23,7 +23,7 @@ function setAge(req, res) {
     // check if this user already voted
     if (util.validate_exists(data.age.votes))
     {
-      const votedIdx = data.age.votes.find(e => e.user === data.u);
+      const votedIdx = data.age.votes.findIndex(e => e.user === data.u);
       if (votedIdx)
       {
         data.age.votes[votedIdx].value = data.a;
