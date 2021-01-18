@@ -75,7 +75,7 @@ const PollAge = (props) =>
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        poll: {age}
+        poll: {(doc !== undefined) ? doc.age.avg : age}
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
