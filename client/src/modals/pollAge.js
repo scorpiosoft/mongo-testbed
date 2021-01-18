@@ -36,9 +36,6 @@ const AgeForm = (props) =>
       onChange={handleChange}
     />
   </Form.Group>
-  {/* <Button variant="primary" type="submit">
-    Submit
-  </Button> */}
 </Form>
   )
 }

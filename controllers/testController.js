@@ -11,9 +11,9 @@ function getAge(req, res) {
 function setAge(req, res) {
   console.log('setAge');
   let data = undefined;
-  if (util.validate_exists(req.body.id))
+  if (util.validate_exists(req.body._id))
   {
-    Test.findById(req.body.id)
+    Test.findById(req.body._id)
         .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
   }
@@ -32,7 +32,7 @@ function setAge(req, res) {
     data.age.avg = Math.round(tot/len);
   } else {
     // technically, should never get here
-    console.log(`id (${req.body.id}) not found`)
+    console.log(`id (${req.body._id}) not found`)
     data = { age: { value: 13, votes: [{user: req.body.u, value: req.body.a}], avg: req.body.a } };
   }
   // const options = {
