@@ -65,7 +65,7 @@ const PollAge = (props) =>
   const handleSubmit = () =>
   {
     doc.u = username;
-    doc.a = age;
+    doc.a = parseInt(age);
     // handle mongo data change
     testApi.setAge(doc).then(res =>
     {}).catch(err => console.log(err));
