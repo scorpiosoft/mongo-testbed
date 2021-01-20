@@ -2,15 +2,24 @@ const Test = require("../models/test");
 const util = require("../util/util");
 
 // getAge - get the 'age' field
-// TODO - allow a 'title' or 'id' to be passed in
+//   if an _id is passed in, get the age associated with that _id
+//   if a (t)itle is passed in, get the age of one matching title
+//   otherwise, get the age of one object
 function getAge(req, res) {
-  console.log('testController:getAge');
-  Test.findOne({}, 'age _id')
+  const data = req.body;
+  let filter = {};
+  console.log(`testController:getAge:data(${JSON.stringify(data,null,2)})`);
+  if (util.validate_exists(data._id))
+  {
+    filter._id = data._id;
+  } else
+  if (util.validate_exists(data.t))
+  {
+    filter.t = data.t;
+  }
+  Test.findOne(filter, 'age _id')
       .then(data => {res.json(data);console.log(data)})
       .catch(err => res.status(422).json(err));
-    // Test.findById(req.body._id)
-    //     .then(data => res.json(data))
-    //     .catch(err => res.status(422).json(err));
     // data = { age: { value: 13, votes: [{user: req.body.u, value: req.body.a}], avg: req.body.a } };
 }
 // setAge - set the 'age' field

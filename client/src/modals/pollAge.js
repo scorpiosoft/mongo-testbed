@@ -52,7 +52,7 @@ const PollAge = (props) =>
     // fetch mongo data
     testApi.getAge().then(res =>
     {
-      console.log(`PollAge.handleShow: res.data: ${JSON.stringify(res.data, 2)}`);
+      console.log(`PollAge.handleShow: res.data: ${JSON.stringify(res.data, null, 2)}`);
       setDoc(res.data);
     }).catch(err => console.log(err));
     // now open dialog
